@@ -10,10 +10,10 @@ ___
 # Authorization Header
 #### Syntax  
   
->"Authorization: Token <credentials>"
+>"Authorization: Token &lt;credentials&gt;"
 
 #### example
->curl -H  "Authorization: Token mytoken12345" <ShariHost>/api/search
+>curl -H  "Authorization: Token mytoken12345" &lt;ShariHost&gt;/api/search
 
     Note the space betwwen Token and mytoken12345
 ___
@@ -91,10 +91,10 @@ ___
 
 * #### Parameters
     * ##### ?m=1 (Search in market profiles instead of products)
-    * ##### ?search=<string to search for>
-    * ##### ?ordering=<name of column to order by>
-    * ##### ?attr=<value of attr to filter with>
-    * ##### ?page=<number of page> 
+    * ##### ?search= string to search for 
+    * ##### ?ordering= name of column to order by 
+    * ##### ?attr= value of attr to filter with
+    * ##### ?page= number of page  
 
 
 ##### market attrs : mclass location
