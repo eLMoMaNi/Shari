@@ -1,4 +1,5 @@
 import 'package:Shari/widgets/category_card.dart';
+import 'package:Shari/widgets/main_drawer.dart';
 import 'package:flutter/material.dart';
 
 const List<Map<String, dynamic>> _categories = const [
@@ -26,6 +27,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: MainDrawer(),
       appBar: AppBar(
         title: Text("Shari App"),
       ),
