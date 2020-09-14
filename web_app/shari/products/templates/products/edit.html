@@ -1,0 +1,151 @@
+{% extends 'core/base.html' %}
+
+{% block 'title' %} Edit Product  {% endblock %}
+
+{% block 'content' %}   
+
+<style>
+    .wrapper {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+        min-height: 100%;
+        padding: 20px;
+    }
+</style>
+
+
+
+
+
+<div class="wrapper ">
+    <div style="width: 777px; 
+            ">
+
+        {% if error %}
+        <div class="alert alert-danger text-center" role="alert">
+            {{ error }}
+        </div>
+        {% endif %}
+        <br>
+        <div class="row justify-content-center text-primary align-items-center">
+            <b>
+                <h1>Edit Product</h1>
+            </b>
+        </div>
+        <hr />
+        <div class="row justify-content-center align-items-center h-100">
+            <form enctype="multipart/form-data" action="." method="post">
+                {% csrf_token %}
+                <div class="form-group  row">
+                    <label class=" text-primary col-sm-2 col-form-label"> Title<b class="text-danger">*</b> </label>
+                    <input type="text" class="form-control col-sm-10" name="title"
+                        placeholder=" Homemade pottery plate" />
+                </div>
+                <div class="form-group row">
+                    <label class="text-primary col-sm-2 col-form-label"> Description<b class="text-danger">*</b>
+                    </label>
+                    <textarea rows="4" class="form-control col-sm-10" name="description"
+                        placeholder=" This piece of ceramic cookware look like piece of artwork. You can display it on shelves or as decorative pieces to enhance modern and contemporary design"></textarea>
+                </div>
+
+                <div class="form-group row">
+                    <label class=" text-primary col-sm-2 col-form-label"> Price<b class="text-danger">*</b> </label>
+                    <input step=".01" type="number" class="form-control col-sm-10" name="price" placeholder=" 10.99 " />
+                </div>
+
+                <div class="form-group  row">
+                    <label class=" text-primary col-sm-2 col-form-label"> Type<b class="text-danger">*</b> </label>
+
+                    <div class="col-sm-10 ">
+                        <div class="form-check-inline form-check text-center">
+                            <input class="form-check-input" type="radio" name="mclass" value="fo">
+                            <label class="form-check-label" for="defaultCheck1">
+                                Food &nbsp;&nbsp;&nbsp;
+
+                            </label>
+                        </div>
+                        <div class="form-check-inline form-check text-center">
+
+                            <input class="form-check-input" type="radio" name="mclass" value="gr">
+                            <label class="form-check-label " for="defaultCheck1">
+                                Grocery &nbsp;&nbsp;&nbsp;
+                            </label>
+                        </div>
+                        <div class="form-check-inline form-check text-center">
+
+                            <input class="form-check-input" type="radio" name="mclass" value="cl">
+                            <label class="form-check-label" for="defaultCheck1">
+                                Clothes &nbsp;&nbsp;&nbsp;
+                            </label>
+                        </div>
+                        <div class="form-check-inline form-check text-center">
+
+                            <input class="form-check-input" type="radio" name="mclass" value="ha">
+                            <label class="form-check-label" for="defaultCheck1">
+                                Handicraft &nbsp;&nbsp;&nbsp;
+                            </label>
+                        </div>
+                        <div class="form-check-inline form-check text-center">
+
+                            <input class="form-check-input" type="radio" name="mclass" value="ph">
+                            <label class="form-check-label" for="defaultCheck1">
+                                pharmacies &nbsp;&nbsp;&nbsp;
+                            </label>
+                        </div>
+                        <div class="form-check-inline form-check text-center">
+
+                            <input class="form-check-input" type="radio" name="mclass" value="ot">
+                            <label class="form-check-label" for="defaultCheck1">
+                                other &nbsp;&nbsp;&nbsp;
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="text-primary col-sm-2 col-form-label"> subType<b class="text-danger">*</b> </label>
+                    <input type="text" class="form-control col-sm-10" name="sclass"
+                        placeholder=" Shoes from clothest, Cake from Food, etc.. " />
+                </div>
+
+                <div class="form-group row">
+                    <label class=" text-primary col-sm-2 col-form-label"> Tags </label>
+                    <input type="text" class="form-control col-sm-10" name="tags"
+                        placeholder=" plate, pottery, decoration, etc " />
+                </div>
+
+
+                <div class="form-group row">
+                    <label class=" text-primary col-sm-2 col-form-label"> Featured Image<b class="text-danger">*</b>
+                    </label>
+
+                    <input type="file" class="form-control col-sm-10" name="wall_pic" placeholder=" wall_pic "  />
+                </div>
+                <div class="form-group row">
+                    <label class=" text-primary col-sm-2 col-form-label"> Images </label>
+                    <input type="file" class="form-control col-sm-10" name="pics" placeholder=" pics " multiple />
+                </div>
+
+
+
+
+        </div>
+
+        <br>
+        <div class="text-center">
+            <button class="btn btn-success w-100 btn-lg " type="submit">
+                   <i class="fas fa-plus"></i>
+            </button> <br><br>
+
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

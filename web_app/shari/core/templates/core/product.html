@@ -1,0 +1,33 @@
+{% extends 'core/base.html' %}
+
+{% block 'title' %} All Products  {% endblock %}
+
+{% block 'content' %}  
+
+ <h1 class="m-5 text-center text-primary"> All Products </h1>
+<div style="margin: 77px;">
+
+
+
+    {% for product in products  %}
+
+    {% if  forloop.counter0|divisibleby:"4" and not forloop.first %} </div>{% endif %}
+    {% if  forloop.counter0|divisibleby:"4"  %} <div class="card-deck m-1"> {% endif %}
+    <div class="card m-1 "  style="width: 19rem; display: block;max-width: 430px">
+        <img class="card-img-top" style="height: 333px;" src="{{product.wall_pic.url}}" alt="No img">
+        <div class="card-body">
+            <h5 class="card-title">{{product.title}}</h5>
+            <p class="card-text"> {{product.description |slice:":50" }}...</p>
+            <a href="/product/{{product.id}}" class="btn btn-primary"> View </a>
+        </div>
+    </div>
+
+
+    {% endfor %}
+</div>
+
+</div>
+
+
+
+{% endblock %}
