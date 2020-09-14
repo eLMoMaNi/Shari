@@ -1,0 +1,144 @@
+{% extends 'products/base.html' %}
+
+{% block 'title' %} Publish a new Market  {% endblock %}
+
+{% block 'content' %}   
+
+
+
+<style>
+      .backimg {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    right: 0px;
+    filter: blur(2px);
+    z-index: -99;
+    -webkit-transition: opacity 1s;
+    -moz-transition: opacity 1s;
+    -ms-transition: opacity 1s;
+    -o-transition: opacity 1s;
+    transition: opacity 1s;
+  }
+        .wrapper {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+            width: 100%;
+            min-height: 100%;
+            padding: 20px;
+          }
+        </style>
+        
+        
+        
+        
+        <img class="backimg" src="/media/{{rand}}.png" />
+        
+        <div class="wrapper ">
+          <div style="width: 777px; background-color : rgba(255, 255, 255, 0.5) ; margin-top:100px;      margin-bottom: 150px;
+          ">
+          
+        {% if error %}
+        <div class="alert alert-danger text-center" role="alert">
+            {{ error }} 
+        </div>
+        {% endif %}
+        <br>
+          <div class="row justify-content-center text-primary align-items-center">
+            <b> <h1>Create New Market Profile</h1> </b>
+          </div>
+          <hr />
+          <div class="row justify-content-center align-items-center h-100">
+            <form  enctype="multipart/form-data" action="." method="post">
+              {% csrf_token %}
+        
+              <div class="form-group">
+                <input type="text" class="form-control" name="name" placeholder=" Name" />
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" name="bio" placeholder=" Description" />
+              </div>
+
+              <div class="form-group">
+                <input type="text" class="form-control" name="location" placeholder=" Location" />
+              </div>
+
+              <div class="form-group">
+                <input type="number" class="form-control" name="number" placeholder=" Phone Number " />
+              </div>
+
+              <div class="form-group">
+                  Market Logo: 200x200
+                <input type="file" class="form-control" name="pic" placeholder=" pic " />
+              </div>
+              <div class="form-group">
+                  Market Wallpaper: 1110x360
+                <input type="file" class="form-control" name="wall_pic" placeholder=" wall_pic " />
+              </div>
+
+              
+              <b class="text-primary ">Type:</b> <br> 
+              <div class="form-check-inline form-check text-center">
+                <input class="form-check-input" type="checkbox"  value="True" name="Food" >
+                <label class="form-check-label" for="defaultCheck1">
+                  Food &nbsp;&nbsp;&nbsp;
+
+                </label>
+              </div>
+              <div class="form-check-inline form-check text-center">
+
+                <input class="form-check-input" type="checkbox"  value="True" name="Grocery" >
+                <label class="form-check-label" for="defaultCheck1">
+                    Grocery &nbsp;&nbsp;&nbsp;
+                </label>
+              </div>
+              <div class="form-check-inline form-check text-center">
+
+                <input class="form-check-input" type="checkbox"  value="True" name="Clothes" >
+                <label class="form-check-label" for="defaultCheck1">
+                    Clothes &nbsp;&nbsp;&nbsp;
+                </label>
+              </div>
+                <div class="form-check-inline form-check text-center">
+
+                    <input class="form-check-input" type="checkbox"  value="True" name="Handicraft" >
+                <label class="form-check-label" for="defaultCheck1">
+                    Handicraft &nbsp;&nbsp;&nbsp;
+                </label>
+                </div>
+                <div class="form-check-inline form-check text-center">
+
+                <input class="form-check-input" type="checkbox"  value="True" name="Pharmacies" >
+                <label class="form-check-label" for="defaultCheck1">
+                    Pharmacies &nbsp;&nbsp;&nbsp;
+                </label>
+                </div>
+                <div class="form-check-inline form-check text-center">
+
+                <input class="form-check-input" type="checkbox"  value="True" name="Other" >
+                <label class="form-check-label" for="defaultCheck1">
+                    Other &nbsp;&nbsp;&nbsp;
+                </label>
+                </div>
+
+            </div>
+            <br>
+
+            <br>
+              <div class="text-center">
+                <button class="btn btn-primary " type="submit">
+                  Create
+                </button> <br><br>
+        
+        
+              
+            </form>
+          </div>
+        </div>
+        </div>
+    
+
+{% endblock %}

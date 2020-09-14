@@ -1,0 +1,201 @@
+{% extends 'core/base.html' %}
+
+{% block 'title' %} {{ market.name }} Market  {% endblock %}
+
+{% block 'content' %}  
+
+{% if has_market %}
+
+
+    <div class="container main-secction" style="margin-top: -15px;min-height: 1000px    ">
+        <div class="row" >
+            <div class="col-md-12 col-sm-12 col-xs-12 image-section">
+                <img {% if market.wall_pic %} src="{{market.wall_pic.url}}"   {% else %}   src="/media/no_wall_pic.png"  {% endif %}  style="width: 100%; max-height: 360px;">
+
+
+            </div>
+            <div class="row user-left-part" style="margin-top:-333; max-width: 1110px; ">
+                <div class="col-md-3 col-sm-3 col-xs-12 user-profil-part pull-left">
+                    <div class="row " style="margin-left: 3px;">
+                        <div class="col-md-12 col-md-12-sm-12 col-xs-12 user-image text-center">
+                            <img {% if market.pic %} src="{{market.pic.url}}"   {% else %}   src="/media/no_pic.png"  {% endif %}  class="rounded-circle" onerror="this.src='https://www.jamf.com/jamf-nation/img/default-avatars/generic-user-purple.png';"  style="    width: 200px;
+                            height: 200px;
+                            overflow: hidden;
+                            margin-top: -77px;"> 
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12 user-detail-section1 text-center mt-3" >
+                            {% if market == his_market %}
+                            <button type="button" class="btn btn-success btn-block follow" data-toggle="tooltip" data-placement="top" title="You can't contact yourself " disabled>
+                                Contact
+                              </button>
+                            {% else %}
+                            <button type="button" class="btn btn-success btn-block follow" >
+                                Contact
+                            </button> 
+                            {% endif %}  
+                            
+                            {% if market == his_market %}
+                            <button type="button" class="btn btn-warning btn-block" data-toggle="tooltip" data-placement="top" title="You can't rate yourself" disabled>
+                                Rate
+                              </button>
+                            {% else %}
+                            <button type="button" class="btn btn-warning btn-block" >
+                                Rate
+                            </button> 
+                            {% endif %} 
+
+                            {% if market == his_market %}
+                            <a href="/market/edit/" class="btn btn-info btn-block" >
+                                Edit
+                            </a>     
+                            {% else %}
+                                <br> <br>
+                            {% endif %}  
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9 col-xs-12 pull-right profile-right-section" style="margin-left: 312px;margin-top: -240px;">
+                    <div class="row profile-right-section-row">
+                        <div class="col-md-12 profile-header">
+                            <div class="row">
+                                <div class="col-md-8 col-sm-6 col-xs-6 profile-header-section1 pull-left">
+                                   <span style="word-wrap: break-word"><h1>{{ market.name }}</h1>  <p style="word-wrap: break-word"> {{market.bio}} </p>
+                                    <br>
+                                      <i class="fa fa-star text-warning" aria-hidden="true"></i><i class="fa fa-star text-warning" aria-hidden="true"></i><i class="fa fa-star text-warning" aria-hidden="true"></i><i class="fa fa-star text-warning" aria-hidden="true"></i><i class="far text-warning fa-star"></i> 4/5 </span> 
+                                
+                                       
+                                   
+                                </div>
+                                
+                            </div>   <br>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-8">
+                                        <ul class="nav nav-tabs" role="tablist">
+                                                <li class="nav-item">
+                                                <a class="nav-link active" href="#profile" role="tab" data-toggle="tab"><i class="fas fa-user-circle"></i> Info</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                <a class="nav-link" href="#buzz" role="tab" data-toggle="tab"><i class="fas fa-info-circle"></i> Statistics</a>
+                                                </li>                                                
+                                            </ul>
+                                            
+                                            <!-- Tab panes -->
+                                            <div class="tab-content">
+                                                <div role="tabpanel" class="tab-pane fade show active" id="profile">
+                                                        <div class="row">
+                                                                <div class="col-md-2">
+                                                                    <label>ID</label>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <p>{{market.id}}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-2">
+                                                                    <label>Full name</label>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <p>{{market.name}}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-2">
+                                                                    <label>Email</label>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <p>test@gmail.com</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-2">
+                                                                    <label>Phone</label>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <p>{{market.number}}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-2">
+                                                                    <label>Classes</label>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <p>
+                                                                    {% for  i in market.mclass  %}
+                                                                        {% with index=forloop.counter0 %}     
+                                                                            {% if i %}
+                                                                                {% for j in mclasses %}
+                                                                                    {% if index == forloop.counter0 %}
+                                                                                        {{ j }},
+                                                                                    {% endif %}
+                                                                                {% endfor %}
+                                                                            {% endif %}
+                                                                        {% endwith %}
+                                                                    {% endfor %}
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-2">
+                                                                    <label>Location</label>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <p>Ibbin, Ajloun </p>
+                                                                </div>
+                                                            </div>
+                                                </div>
+                                                <div role="tabpanel" class="tab-pane fade" id="buzz">
+                                                        <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <label>Last month rating</label>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <p>4.3/5</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <label>Last month products</label>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <p> 22 </p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <label>Last month viewes </label>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <p>3.2K </p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <label> More </label>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <p>Soon</p>
+                                                                </div>
+                                                            </div>
+                                                </div>       
+                                            </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% else %}
+    <div class="text-center">
+        <br><p>You haven't registered your market yet, create new one now! </p> 
+        <a href="/market/create" class="">  <button class="btn btn-success mb-5" > Create Market Profile </button> </a>
+    </div>
+{% endif %}
+
+{% endblock %}

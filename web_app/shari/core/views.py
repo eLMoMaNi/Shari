@@ -57,3 +57,23 @@ def signupuser(request):
             return redirect('/')
         else:
             return render(request, 'core/signupuser.html', {'error': 'Mismatched Passwords, try again'})
+
+def market(request):
+    if request.method == 'GET':
+        if request.user.is_authenticated:
+            markets =   MarketProfile.objects.all() 
+            return render (request, 'core/market.html', {'markets': markets}) 
+        else:
+            return redirect('/login')
+    return redirect ('/')
+
+
+
+def mymarket(request):
+    if request.method == 'GET':
+        if request.user.is_authenticated and MarketProfile.objects.filter(user=request.user.id).exists(): #has a market
+            market =   MarketProfile.objects.filter(user=request.user.id).first() # first in case of many market (tests)
+            return redirect ("/market/" + str(market.id)) 
+        else:
+            return redirect('/login')
+    return redirect ('/')
