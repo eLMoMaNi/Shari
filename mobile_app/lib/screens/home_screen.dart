@@ -1,5 +1,6 @@
 import 'package:Shari/widgets/category_card.dart';
 import 'package:Shari/widgets/main_drawer.dart';
+import 'package:Shari/widgets/seach_box.dart';
 import 'package:flutter/material.dart';
 
 const List<Map<String, dynamic>> _categories = const [
@@ -35,6 +36,9 @@ class HomeScreen extends StatelessWidget {
         padding: EdgeInsets.all(20),
         // shrinkWrap: true,
         children: [
+          Container(
+            child: SearchBox(),
+          ),
           SizedBox(
             height: 20,
           ),
