@@ -1,4 +1,6 @@
-import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
+
+import 'market.dart';
 
 class Product {
   final String title;
@@ -52,4 +54,8 @@ class Product {
         date = json["created_at"] ?? "",
         marketId = json["market"]?.toString() ?? "0",
         rating = json["rating"] ?? 0.0;
+
+  Future<Market> getMarket(BuildContext context) async {
+    return Market.getMarketbyId(this.marketId, context);
+  }
 }

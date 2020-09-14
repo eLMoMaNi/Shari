@@ -1,5 +1,11 @@
-import 'package:Shari/screens/login_screen.dart';
 import 'package:flutter/material.dart';
+
+import 'screens/login_screen.dart';
+import 'package:provider/provider.dart';
+
+import 'screens/serach_screen.dart';
+import 'providers/current_user.dart';
+import 'providers/current_market.dart';
 
 void main() {
   runApp(ShariApp());
@@ -8,29 +14,46 @@ void main() {
 class ShariApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        accentColor: Colors.blueGrey,
-        textTheme: ThemeData.light().textTheme.copyWith(
-              headline6: TextStyle(
-                  fontFamily: "Tajawal",
-                  fontWeight: FontWeight.w600,
-                  fontSize: 26,
-                  color: Colors.white),
-              bodyText2: TextStyle(
-                fontFamily: "Tajawal",
-                fontWeight: FontWeight.w600,
-                fontSize: 16,
-              ),
-              //
-            ),
-      ),
-      home: // DashboardScreen(),
-          LoginScreen(),
-      routes: {
-        "/login": (_) => LoginScreen(),
-      },
-    );
+    return MultiProvider(
+        providers: [
+          ChangeNotifierProvider(
+            create: (_) => CurrentUser(),
+          ),
+          ChangeNotifierProxyProvider<CurrentUser, CurrentMarket>(
+              create: null,
+              update: (_, currentUser, prevMarket) {
+                if (prevMarket == null)
+                  return CurrentMarket(currentUser.token);
+                else {
+                  prevMarket.token = currentUser.token;
+                  return prevMarket;
+                }
+              }),
+        ],
+        child: MaterialApp(
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+            accentColor: Colors.blueGrey,
+            textTheme: ThemeData.light().textTheme.copyWith(
+                  headline6: TextStyle(
+                      fontFamily: "Tajawal",
+                      fontWeight: FontWeight.w600,
+                      fontSize: 26,
+                      color: Colors.white),
+                  bodyText2: TextStyle(
+                    fontFamily: "Tajawal",
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16,
+                  ),
+                  //
+                ),
+          ),
+          home: // DashboardScreen(),
+              LoginScreen(),
+          routes: {
+            "/login": (_) => LoginScreen(),
+            "/search": (_) => SearchScreen()
+          },
+        ));
   }
 }

@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+
+import 'package:provider/provider.dart';
 import '../screens/login_screen.dart';
+
+import '../providers/current_user.dart';
 import './profile_drawer_card.dart';
 
 const double _iconsSize = 35;
@@ -56,6 +60,9 @@ class MainDrawer extends StatelessWidget {
                               actions: [
                                 FlatButton(
                                     onPressed: () {
+                                      Provider.of<CurrentUser>(context,
+                                              listen: false)
+                                          .token = null;
                                       //this push to Loginscreen and clear the stack
                                       //idk how it exactly works, so DON'T Touch
                                       Navigator.of(context)

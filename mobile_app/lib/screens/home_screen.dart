@@ -1,7 +1,8 @@
-import 'package:Shari/widgets/category_card.dart';
-import 'package:Shari/widgets/main_drawer.dart';
-import 'package:Shari/widgets/seach_box.dart';
 import 'package:flutter/material.dart';
+
+import '../widgets/category_card.dart';
+import '../widgets/main_drawer.dart';
+import '../widgets/search_box.dart';
 
 const List<Map<String, dynamic>> _categories = const [
   {"category": "Food", "color": Colors.green, "icon": Icons.restaurant},

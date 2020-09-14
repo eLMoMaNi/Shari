@@ -1,9 +1,19 @@
 import 'package:flutter/material.dart';
 
+import '../screens/serach_screen.dart';
+
 class SearchBox extends StatefulWidget {
+  final bool withBackButton;
   final String initValue;
+  final Map<String, dynamic> initArgs;
+
   final Color borederColor;
-  SearchBox({this.initValue = "", this.borederColor});
+  SearchBox({
+    this.initValue = "",
+    this.borederColor,
+    this.initArgs = const {},
+    this.withBackButton = false,
+  });
   @override
   _SearchBoxState createState() => _SearchBoxState();
 }
@@ -12,7 +22,16 @@ class _SearchBoxState extends State<SearchBox> {
   final _searchController = TextEditingController();
   bool _hasText = false;
 
-  void _searchProducts(String input) {}
+  void _searchProducts(String input) {
+    var args = {...widget.initArgs};
+    args["searchText"] = input;
+    if (widget.withBackButton) {
+      Navigator.of(context)
+          .pushReplacementNamed(SearchScreen.route, arguments: args);
+    } else {
+      Navigator.of(context).pushNamed(SearchScreen.route, arguments: args);
+    }
+  }
 
   @override
   void didChangeDependencies() {
@@ -38,7 +57,9 @@ class _SearchBoxState extends State<SearchBox> {
                 textInputAction: TextInputAction.search,
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.all(16),
-                  prefixIcon: Icon(Icons.search),
+                  prefixIcon: (widget.withBackButton)
+                      ? BackButton()
+                      : Icon(Icons.search),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30)),
                   enabledBorder: OutlineInputBorder(

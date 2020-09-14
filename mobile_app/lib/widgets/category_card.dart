@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../screens/serach_screen.dart';
+
 class CategoryCard extends StatelessWidget {
   final String _category;
   final IconData _icon;
@@ -26,7 +28,10 @@ class CategoryCard extends StatelessWidget {
             color: Colors.transparent,
             child: InkWell(
               onTap: () {
-                //TODO implement results screen
+                Navigator.of(context).pushNamed(SearchScreen.route, arguments: {
+                  "categories": [_category],
+                  "color": _color
+                });
               },
             ),
           ))

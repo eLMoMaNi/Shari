@@ -17,10 +17,10 @@ class Location {
   ///
   ///The json MUST be decoded.
   Location.fromJSON(Map<String, String> json)
-      : country = json["country"] = "unknown",
-        city = json["city"] = "unknown",
-        address = json["address"] = "unknown",
-        map = json["map"] = "unknown";
+      : country = json["country"] ?? "unknown",
+        city = json["city"] ?? "unknown",
+        address = json["address"] ?? "unknown",
+        map = json["map"] ?? "unknown";
 }
 
 class ShariTheme {
@@ -65,7 +65,7 @@ class Market {
   final String date;
   final String userId;
   final double rating;
-  static String host = "https://shari-amazon.tk"; //TOCHANGE
+  static String host = "http://192.168.1.7:8000"; //TOCHANGE
   static String url = "/api/market";
 
   ///create market by passing properties
