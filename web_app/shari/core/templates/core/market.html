@@ -1,0 +1,33 @@
+{% extends 'core/base.html' %}
+
+{% block 'title' %} All Markets  {% endblock %}
+
+{% block 'content' %}  
+
+ <h1 class="m-5 text-center text-primary"> All  Market Profiles </h1>
+ <div style="margin: 77px;">
+
+
+
+    {% for market in markets  %}
+
+    {% if  forloop.counter0|divisibleby:"4" and not forloop.first %} </div>{% endif %}
+    {% if  forloop.counter0|divisibleby:"4"  %} <div class="card-deck m-1"> {% endif %}
+    <div class="card m-1 "  style="width: 19rem; display: block;max-width: 430px">
+        <img class="card-img-top" {% if market.pic %} src="{{market.pic.url}}"   {% else %}   src="/media/no_pic.png"  {% endif %}   alt="No img">
+        <div class="card-body">
+            <h5 class="card-title">{{market.title}}</h5>
+            <p class="card-text"> {{market.bio |slice:":50" }}...</p>
+            <a href="/market/{{market.id}}" class="btn btn-primary"> View </a>
+        </div>
+    </div>
+
+
+    {% endfor %}
+</div>
+
+</div>
+
+
+
+{% endblock %}

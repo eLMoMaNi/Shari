@@ -1,0 +1,188 @@
+{% extends 'products/base.html' %}
+
+{% block 'title' %} Edit your Market Profile  {% endblock %}
+
+{% block 'content' %}   
+
+   
+
+<style>
+    .backimg {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  right: 0px;
+  filter: blur(2px);
+  z-index: -99;
+  -webkit-transition: opacity 1s;
+  -moz-transition: opacity 1s;
+  -ms-transition: opacity 1s;
+  -o-transition: opacity 1s;
+  transition: opacity 1s;
+}
+      .wrapper {
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+          justify-content: center;
+          width: 100%;
+          min-height: 100%;
+          padding: 20px;
+        }
+      </style>
+      
+      
+      
+      
+      <img class="backimg" src="/media/{{rand}}.png" />
+      
+      <div class="wrapper ">
+        <div style="width: 777px; background-color : rgba(255, 255, 255, 0.5) ; margin-top:100px;      margin-bottom: 150px;
+        ">
+        
+      {% if error %}
+      <div class="alert alert-danger text-center" role="alert">
+          {{ error }} 
+      </div>
+      {% endif %}
+      <br>
+        <div class="row justify-content-center text-primary align-items-center">
+          <b> <h1>Edit your Market Profile</h1> </b>
+        </div>
+        <hr />
+        <div class="row justify-content-center align-items-center h-100">
+          <form  enctype="multipart/form-data" action="." method="post">
+            {% csrf_token %}
+      
+            <div class="form-group">
+              <input type="text" class="form-control" name="name" placeholder=" Name" />
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" name="bio" placeholder=" Description" />
+            </div>
+
+            <div class="form-group">
+              <input type="text" class="form-control" name="location" placeholder=" Location" />
+            </div>
+
+            <div class="form-group">
+              <input type="number" class="form-control" name="number" placeholder=" Phone Number " />
+            </div>
+
+            <div class="form-group">
+                Market Logo: 200x200
+              <input type="file" class="form-control" name="pic" placeholder=" pic " />
+            </div>
+            <div class="form-group">
+                Market Wallpaper: 1110x360
+              <input type="file" class="form-control" name="wall_pic" placeholder=" wall_pic " />
+            </div>
+
+            
+            <b class="text-primary ">Type:</b> <br> 
+            <div class="form-check-inline form-check text-center">
+              <input class="form-check-input" type="checkbox" name="Food" value="Food">
+              <label class="form-check-label" for="defaultCheck1">
+                Food &nbsp;&nbsp;&nbsp;
+
+              </label>
+            </div>
+            <div class="form-check-inline form-check text-center">
+
+              <input class="form-check-input" type="checkbox" name="Grocery" value="Grocery" >
+              <label class="form-check-label" for="defaultCheck1">
+                  Grocery &nbsp;&nbsp;&nbsp;
+              </label>
+            </div>
+            <div class="form-check-inline form-check text-center">
+
+              <input class="form-check-input" type="checkbox" name="Clothes" value="Clothes" >
+              <label class="form-check-label" for="defaultCheck1">
+                Clothes &nbsp;&nbsp;&nbsp;
+              </label>
+            </div>
+              <div class="form-check-inline form-check text-center">
+
+                  <input class="form-check-input" type="checkbox" name="Handicraft" value="Handicraft" >
+              <label class="form-check-label" for="defaultCheck1">
+                  Handicraft &nbsp;&nbsp;&nbsp;
+              </label>
+              </div>
+              <div class="form-check-inline form-check text-center">
+
+              <input class="form-check-input" type="checkbox" name="Pharmacies" value="Pharmacies" >
+              <label class="form-check-label" for="defaultCheck1">
+                  Pharmacies &nbsp;&nbsp;&nbsp;
+              </label>
+              </div>
+              <div class="form-check-inline form-check text-center">
+
+              <input class="form-check-input" type="checkbox" name="Other"  value="Other">
+              <label class="form-check-label" for="defaultCheck1">
+                  Other &nbsp;&nbsp;&nbsp;
+              </label>
+              </div>
+
+          </div>
+          <br>
+
+          <br>
+            <div class="text-center">
+              <button class="btn btn-success " type="submit">
+                <i class="fas fa-check"></i>  Done
+              </button> &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp;
+
+              <a href="/" class="btn btn-info"><i class="fas fa-times">   </i>  Cancel  </a>
+              &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp;
+              <button type="button" class="btn btn-danger waves-effect waves-light" data-toggle="modal" data-target="#centralModal"> <i class="fas fa-trash-alt"></i>     Delete  </button> <br> <br> <br>
+        </div>
+          </form>
+
+
+
+
+
+      
+            
+            
+              
+            
+        <!-- Central Modal Medium -->
+            <div class="modal fade" id="centralModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <!--Content-->
+                <div class="modal-content">
+                  <!--Header-->
+                  <div class="modal-header">
+                    <h4 class="modal-title w-100" id="myModalLabel">Delete Your Profile Market</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <!--Body-->
+                  <div class="modal-body">
+                    Are you SURE you want DELETE your market profile permanently? (this action can not be undo)
+                  </div>
+                  <!--Footer-->
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                    <form action="/market/delete/" method="post">
+                        {% csrf_token %}
+                        <button class="btn btn-danger" type="submit"> Yes, Delete </button>
+                    </form>
+                  </div>
+                </div>
+                <!--/.Content-->
+              </div>
+            </div>
+            <!-- Central Modal Medium -->
+        
+
+
+      </div>
+      </div>
+  
+
+{% endblock %}
