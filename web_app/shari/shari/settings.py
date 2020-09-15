@@ -39,9 +39,23 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core',
     'markets',
-    'products'
+    'products',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'api',
 
 ]
+
+
+
+REST_FRAMEWORK = {
+    'UNICODE_JSON': True,  #  Arabic & Emoji 
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    )
+}
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -129,5 +143,5 @@ USE_TZ = True
 STATIC_URL  = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-MEDIA_ROOT  = os.path.join(BASE_DIR, 'static/media')
 MEDIA_URL   = '/media/'
+MEDIA_ROOT  = os.path.join(BASE_DIR, 'static/media')

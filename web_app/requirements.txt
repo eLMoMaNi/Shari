@@ -8,6 +8,8 @@ contextlib2==0.6.0
 distlib==0.3.0
 distro==1.5.0
 Django==2.2.15
+django-rest-framework==0.1.0
+djangorestframework==3.11.1
 html5lib==1.0.1
 idna==2.9
 ipaddr==2.2.0
