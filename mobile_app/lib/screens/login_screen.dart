@@ -18,7 +18,7 @@ class LoginScreen extends StatelessWidget {
       LoginData data, String action, CurrentUser currentUser) async {
     //this function should return null if login success
     //else return string with error message
-    final host = "http://192.168.1.7:8000"; //TOCHANGE
+    final host = "https://shari-amazon.tk"; //TOCHANGE
     final _url = "/api/$action";
 
     try {

@@ -12,7 +12,7 @@ class CurrentUser with ChangeNotifier {
   String token;
   CurrentUser();
   //TOCHANGE
-  final host = "http://192.168.1.7:8000";
+  final host = "https://shari-amazon.tk";
   final url = "/api/user/myprofile";
 
   get headers {

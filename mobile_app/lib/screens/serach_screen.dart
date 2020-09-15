@@ -28,7 +28,7 @@ class _SearchScreenState extends State<SearchScreen> {
   //? bool _isInit=false;
 
   //properties used for lazy loading
-  final host = "http://192.168.1.7:8000";
+  final host = "https://shari-amazon.tk";
   final url = "/api/search"; //TOCHANGE
   int _currentPage = 1;
   List<Product> _results = <Product>[];

@@ -73,7 +73,7 @@ class Market {
   final String date;
   final String userId;
   final double rating;
-  static String host = "http://192.168.1.7:8000"; //TOCHANGE
+  static String host = "https://shari-amazon.tk"; //TOCHANGE
   static String url = "/api/market";
 
   ///create market by passing properties

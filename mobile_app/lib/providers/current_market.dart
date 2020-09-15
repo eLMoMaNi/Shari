@@ -17,7 +17,7 @@ class CurrentMarket with ChangeNotifier {
   String marketId;
   CurrentMarket(this.token);
 
-  final String host = "http://192.168.1.7:8000"; //TOCHANGE
+  final String host = "https://shari-amazon.tk"; //TOCHANGE
   final String url = "/api/market";
 
   get headers {
@@ -56,7 +56,21 @@ class CurrentMarket with ChangeNotifier {
     Color accentColor,
     List<Map<String, dynamic>> layout,
   }) async {
-    //TODO edit my market theme
+    //TODO edit my market to update server
+    //This Only update locally
+    var newTheme = ShariTheme();
+    //Change colors:
+
+    // if primary color not passed, keep original //? there're maybe better approachs
+    newTheme.primaryColor =
+        (primaryColor != null) ? primaryColor : details.theme.primaryColor;
+    newTheme.accentColor =
+        (accentColor != null) ? accentColor : details.theme.accentColor;
+    details.theme = newTheme;
+
+    //Change layout
+
+    notifyListeners();
   }
 
   Future<void> edit({ShariTheme theme}) async {

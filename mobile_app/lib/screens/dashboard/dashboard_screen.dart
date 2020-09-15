@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 
-import '../../screens/dashboard/market_home.dart';
+import '../../screens/dashboard/market_profile/market_home.dart';
 import '../../providers/current_market.dart';
 import '../../providers/current_user.dart';
 import '../../screens/dashboard/bookmarks_screen.dart';
@@ -64,7 +64,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
       body: tabs[_currentTabIdx],
       bottomNavigationBar: Consumer2<CurrentUser, CurrentMarket>(
         builder: (_, currentUser, currentMarket, __) {
-          if (currentMarket.hasMarket) tabs[3] = MarketHomeScreen();
+          if (currentMarket.hasMarket)
+            tabs[3] = MarketHomeScreen(currentMarket);
           return BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
             currentIndex: _currentTabIdx,

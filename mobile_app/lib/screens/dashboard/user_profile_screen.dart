@@ -25,7 +25,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
   bool _isEditing = false;
   bool _isInit = false;
   //TOCHANGE
-  final host = "http://192.168.1.7:8000";
+  final host = "https://shari-amazon.tk";
 
   Future<void> _postData() async {
     Provider.of<CurrentUser>(context, listen: false)
