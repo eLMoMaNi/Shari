@@ -1,0 +1,50 @@
+{% extends 'core/base.html' %}
+
+{% block 'title' %}
+Search : {{request.GET.search}} 
+{% endblock %}
+
+
+{% block 'content' %}  
+
+ <h1 class="m-5 text-center text-primary"> Result of: {{request.GET.search}} </h1>
+<div style="margin: 77px;">
+
+
+
+    {%  for product in results.results  %}
+
+    {% if  forloop.counter0|divisibleby:"4" and not forloop.first %} </div>{% endif %}
+    {% if  forloop.counter0|divisibleby:"4"  %} <div class="card-deck m-1"> {% endif %}
+    <div class="card m-1 "  style="width: 19rem; display: block;max-width: 430px">
+        <img class="card-img-top" style="height: 333px;" src="{{product.wall_pic}}" alt="No img">
+        <div class="card-body">
+            <h5 class="card-title">{{product.title}}</h5>
+            <p class="card-text"> {{product.description |slice:":50" }}...</p>
+            <a href="/product/{{product.id}}" class="btn btn-primary"> View </a>
+        </div>
+    </div>
+
+
+    {% endfor %}
+</div>
+
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      <li class="page-item ">
+        <a class="page-link" href="{{results.previous|cut:'api/'}}" tabindex="-1">Previous</a>
+      </li>
+      {% for i in range %}
+      <li class="page-item"><a class="page-link" href="?search={{request.GET.search}}&page={{forloop.counter}}">{{forloop.counter}}</a></li>
+      {% endfor %}
+      <li class="page-item">
+        <a class="page-link" href="{{results.next|cut:'api/' }}">Next</a>
+      </li>
+    </ul>
+  </nav>
+
+
+
+{% endblock %}
+

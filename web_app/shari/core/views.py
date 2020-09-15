@@ -4,10 +4,29 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse
 from markets.models import MarketProfile 
 from products.models import Product
+from rest_framework.authtoken.models import Token
+import requests as req
+from math import ceil
 
 
 def home(request):  # TODO
     return render(request, 'core/home.html')
+
+
+
+def search(request): # for DEV use Only 
+    if request.method == 'GET' and request.user.is_authenticated:
+        
+        if not Token.objects.filter(user = request.user).exists():
+            token = Token.objects.create(user=request.user)
+        else:
+            token = Token.objects.get(user=request.user)
+
+
+        auth = {'Authorization':'Token '+ token.key  }  
+        results =   req.get( 'https://' + request.META['HTTP_HOST'] + '/api/search',headers=auth,params=request.GET).json()
+        return render(request,'core/search.html',{'results': results,'range': range(ceil(results['count'] / 10) )   } )
+    return redirect ('/login')
 
 
 def loginuser(request):

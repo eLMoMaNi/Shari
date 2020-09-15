@@ -4,8 +4,6 @@
 
 {% block 'content' %}  
 
-{% if has_market %}
-
 
     <div class="container main-secction" style="margin-top: -15px;min-height: 1000px    ">
         <div class="row" >
@@ -188,14 +186,29 @@
                 </div>
             </div>
         </div>
+
+        <div class="text-center">
+            <br><hr>
+            <a href="/product/create">  <button class="btn btn-success mb-5" > Add New Product! <br> <i class="fas fa-plus"></i> </button> </a>
+        </div>
+
+
+    {%  for product in products  %}
+
+    {% if  forloop.counter0|divisibleby:"3" and not forloop.first %} </div>{% endif %}
+    {% if  forloop.counter0|divisibleby:"3"  %} <div class="card-deck m-1"> {% endif %}
+    <div class="card m-1 "  style="width: 19rem; display: block;max-width: 430px">
+        <img class="card-img-top" style="height: 333px;"  {% if product.wall_pic.url %} src="{{product.wall_pic.url}}"   {% else %}   src="/media/no_pic.png"  {% endif %} alt="No img">
+        <div class="card-body">
+            <h5 class="card-title">{{product.title}}</h5>
+            <p class="card-text"> {{product.description |slice:":50" }}...</p>
+            <a href="/product/{{product.id}}" class="btn btn-primary"> View </a>
+        </div>
     </div>
 
 
-{% else %}
-    <div class="text-center">
-        <br><p>You haven't registered your market yet, create new one now! </p> 
-        <a href="/market/create" class="">  <button class="btn btn-success mb-5" > Create Market Profile </button> </a>
+    {% endfor %}
+    
     </div>
-{% endif %}
 
 {% endblock %}

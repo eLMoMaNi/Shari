@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'api',
+    'django_s3_storage',
+
 
 ]
 
@@ -52,7 +54,9 @@ REST_FRAMEWORK = {
     'UNICODE_JSON': True,  #  Arabic & Emoji 
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
-    )
+    ),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10,
 }
 
 
@@ -92,16 +96,19 @@ WSGI_APPLICATION = 'shari.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = {   # for DEV only
+""" 
+DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'sharidb',
-        'USER': 'shariadmin',
-        'PASSWORD': 'oa321321',
-        'HOST': 'localhost',
-        'PORT': '',
+        'NAME': 'humm',
+        'USER': 'humm',
+        'PASSWORD': 'humm',
+        'HOST': 'humm.rds.amazonaws.com',
+        'PORT': 'humm',
     }
-}
+} 
+"""
+
 
 
 # Password validation
@@ -128,7 +135,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Amman'
 
 USE_I18N = True
 
@@ -137,11 +144,24 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_URL  = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
+MEDIA_ROOT  =   os.path.join(BASE_DIR,'static/media/' )    #'/tmp/'   for DEV as we don't validate the uploaded files yet  
 MEDIA_URL   = '/media/'
-MEDIA_ROOT  = os.path.join(BASE_DIR, 'static/media')
+
+
+STATICFILES_STORAGE = "django_s3_storage.storage.StaticS3Storage"
+DEFAULT_FILE_STORAGE = "django_s3_storage.storage.S3Storage"
+
+BUCKET = "humm"
+
+AWS_S3_BUCKET_NAME_STATIC = BUCKET
+AWS_S3_BUCKET_NAME = BUCKET
+
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % BUCKET
+STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
+
+
+AWS_ACCESS_KEY_ID='humm'
+AWS_SECRET_ACCESS_KEY='humm'
