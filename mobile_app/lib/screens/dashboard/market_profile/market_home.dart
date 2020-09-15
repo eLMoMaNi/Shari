@@ -60,11 +60,8 @@ class _MarketHomeScreenState extends State<MarketHomeScreen> {
     var marketTheme = marketDetails.theme; //shortcut
     vh = MediaQuery.of(context).size.height;
     vw = MediaQuery.of(context).size.width;
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Market Name"),
-      ), //TODO make it dynamic
-      body: ListView(
+    return SafeArea(
+      child: ListView(
         padding: EdgeInsets.all(8),
         children: [
           buildColorPickers(context, marketTheme, currentMarket),

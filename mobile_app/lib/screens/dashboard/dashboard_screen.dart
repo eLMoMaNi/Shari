@@ -1,3 +1,4 @@
+import 'package:Shari/screens/dashboard/market_profile/market_dashboard_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
@@ -64,8 +65,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       body: tabs[_currentTabIdx],
       bottomNavigationBar: Consumer2<CurrentUser, CurrentMarket>(
         builder: (_, currentUser, currentMarket, __) {
-          if (currentMarket.hasMarket)
-            tabs[3] = MarketHomeScreen(currentMarket);
+          if (currentMarket.hasMarket) tabs[3] = MarketDashboardScreen();
           return BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
             currentIndex: _currentTabIdx,

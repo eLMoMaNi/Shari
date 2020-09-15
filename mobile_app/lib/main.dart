@@ -4,7 +4,7 @@ import 'screens/login_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'screens/dashboard/user_profile_screen.dart';
-import 'screens/serach_screen.dart';
+import 'screens/search_screen.dart';
 import 'providers/current_user.dart';
 import 'providers/current_market.dart';
 

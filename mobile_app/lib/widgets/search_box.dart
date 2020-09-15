@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../screens/serach_screen.dart';
+import '../screens/search_screen.dart';
 
 class SearchBox extends StatefulWidget {
   final bool withBackButton;
