@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../screens/dashboard/user_profile_screen.dart';
+
 class ProfileDrawerCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -8,7 +10,7 @@ class ProfileDrawerCard extends StatelessWidget {
       leading: Icon(Icons.person_outline_rounded),
       title: Text("Profile"),
       onTap: () {
-        //TODO go to profile page
+        Navigator.of(context).pushNamed(UserProfileScreen.route);
       },
     );
   }

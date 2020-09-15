@@ -1,5 +1,7 @@
+import '../widgets/rating_widget.dart';
 import 'package:flutter/material.dart';
 
+import '../screens/product_screen.dart';
 import '../models/market.dart';
 import '../models/product.dart';
 
@@ -14,6 +16,8 @@ class ProductCard extends StatelessWidget {
     return InkWell(
       onTap: () {
         //TODO make product page
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (_) => ProductScreen(product)));
       },
       child: Card(
         elevation: 5,
@@ -49,6 +53,10 @@ class ProductCard extends StatelessWidget {
                             textAlign: TextAlign.center,
                             overflow: TextOverflow.fade,
                             softWrap: false,
+                          ),
+                          RatingWidget(
+                            color: priceColor,
+                            rating: product.rating,
                           ),
                           FutureBuilder<Market>(
                             future: product.getMarket(context),

@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 
 import '../models/message_exception.dart';
 import '../providers/current_user.dart';
-import '../screens/home_screen.dart';
+import '../screens/dashboard/dashboard_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   static const route = "/login";
@@ -62,7 +62,7 @@ class LoginScreen extends StatelessWidget {
       onSignup: (loginData) => _authUser(loginData, "signup", currentUser),
       onSubmitAnimationCompleted: () {
         Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => HomeScreen(),
+          builder: (context) => DashboardScreen(),
         ));
       },
       onRecoverPassword: _recoverPassword,

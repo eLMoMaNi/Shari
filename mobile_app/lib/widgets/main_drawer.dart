@@ -48,7 +48,6 @@ class MainDrawer extends StatelessWidget {
                   ListTile(
                     leading: Icon(Icons.logout, size: _iconsSize),
                     title: Text("Logout"),
-                    //Todo
                     onTap: () {
                       showDialog(
                           context: context,

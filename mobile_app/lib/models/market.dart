@@ -1,4 +1,12 @@
+import 'dart:convert' as convert;
 import 'package:flutter/material.dart';
+
+import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
+
+import '../models/message_exception.dart';
+import '../providers/current_market.dart';
+import '../widgets/show_error.dart';
 
 class Location {
   String country;
@@ -103,6 +111,7 @@ class Market {
         profilePicture = json["pic"] ?? "https://via.placeholder.com/150",
         wallpaper = json["wall_pic"] ?? "https://via.placeholder.com/350x150",
         categories = json["mclass"]?.cast<String>() ?? ["Other"],
+        //todo change layout to theme in serverside
         theme = ShariTheme.fromJSON(json["layout"] ?? {}),
         id = json["id"]?.toString() ?? "1",
         date = json["created_at"] ?? "unkown",
@@ -115,6 +124,17 @@ class Market {
   ///`userId` must follow the server specification
   static Future<Market> getMarketbyId(
       String marketId, BuildContext context) async {
-    //TODO
+    //get token
+    var headers = Provider.of<CurrentMarket>(context).headers;
+    var res = await http
+        .get("$host$url/$marketId", headers: headers)
+        .catchError((_) => showError(
+            context,
+            MessageException(
+                "Something went wrong, check your internet connection")));
+    Map<String, dynamic> body =
+        convert.json.decode(convert.utf8.decode(res.bodyBytes));
+    var market = Market.fromJSON(body);
+    return market;
   }
 }
