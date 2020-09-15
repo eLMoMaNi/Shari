@@ -4,21 +4,21 @@ import '../../widgets/category_card.dart';
 import '../../widgets/search_box.dart';
 
 const List<Map<String, dynamic>> _categories = const [
-  {"category": "Food", "color": Colors.green, "icon": Icons.restaurant},
+  {"category": "Food", "color": Colors.red, "icon": Icons.restaurant},
   {
     "category": "Grocery",
-    "color": Colors.red,
+    "color": Colors.green,
     "icon": Icons.local_grocery_store
   },
   {
     "category": "Clothes",
-    "color": Colors.orange,
+    "color": Colors.purple,
     "icon": Icons.design_services
   },
   {"category": "Handicraft", "color": Colors.pink, "icon": Icons.handyman},
   {
     "category": "Pharmacies",
-    "color": Colors.purple,
+    "color": Colors.orange,
     "icon": Icons.local_pharmacy
   },
   {"category": "Other", "color": Colors.grey, "icon": Icons.waves},
@@ -40,16 +40,16 @@ class HomeScreen extends StatelessWidget {
         GridView(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                childAspectRatio: 3 / 2,
+                childAspectRatio: 2 / 2,
                 crossAxisSpacing: 20,
-                mainAxisSpacing: 10),
+                mainAxisSpacing: 15),
             primary: false,
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             children: _categories
                 .map((cate) =>
                     CategoryCard(cate["category"], cate["icon"], cate["color"]))
-                .toList())
+                .toList()),
       ],
     );
   }
