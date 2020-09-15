@@ -8,6 +8,6 @@ urlpatterns = [
     path('signup/'   , views.signupuser ,name='signupuser'),
     path('market/'   , views.market     ,name='market'),
     path('my-market/', views.mymarket   ,name='mymarket'),
-    
-    
+    path('product/'  , views.product    ,name='product'),
+
 ]

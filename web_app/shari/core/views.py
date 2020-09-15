@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.http import HttpResponse
+from markets.models import MarketProfile 
+from products.models import Product
 
 
 def home(request):  # TODO
@@ -58,6 +60,7 @@ def signupuser(request):
         else:
             return render(request, 'core/signupuser.html', {'error': 'Mismatched Passwords, try again'})
 
+
 def market(request):
     if request.method == 'GET':
         if request.user.is_authenticated:
@@ -68,12 +71,21 @@ def market(request):
     return redirect ('/')
 
 
-
 def mymarket(request):
     if request.method == 'GET':
         if request.user.is_authenticated and MarketProfile.objects.filter(user=request.user.id).exists(): #has a market
             market =   MarketProfile.objects.filter(user=request.user.id).first() # first in case of many market (tests)
             return redirect ("/market/" + str(market.id)) 
+        else:
+            return redirect('/login')
+    return redirect ('/')
+
+
+def product(request):
+    if request.method == 'GET':
+        if request.user.is_authenticated:
+            products =   Product.objects.all() 
+            return render (request, 'core/product.html', {'products': products}) 
         else:
             return redirect('/login')
     return redirect ('/')
