@@ -14,15 +14,14 @@ class Product(models.Model):
     mclass      =   models.CharField(max_length=100)
     sclass      =   models.CharField(max_length=100)
     tags        =   ArrayField(models.CharField(max_length=100), blank=True, null=True)
-   
+    features    =   models.TextField(blank=True, null=True, max_length=500)     # from AI image search
+
     created_at  =   models.DateTimeField(auto_now_add=True)
     updated_at  =   models.DateTimeField(auto_now=True)
 
 
     def __str__(self):
         return self.title
-
-        
 class ProductImg(models.Model):
     product     =   models.ForeignKey(Product, on_delete=models.CASCADE, default=None, blank=True, null=True)
 

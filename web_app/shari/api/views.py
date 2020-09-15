@@ -113,9 +113,181 @@ class UserProfileView(APIView):   # api/user/myprofile #
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#############################<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
+########################################################
+class MarketView(APIView):      # api/market/myprofile #
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request, *args, **kwargs):
+        if MarketProfile.objects.filter(user=request.user).exists():
+            return Response ({'error':'You have already created your market'},status.HTTP_400_BAD_REQUEST)
+
+        serializer = MarketProfileSer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(user=request.user)
+            return Response(serializer.data)
+        return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
+
+
+    def put(self, request, *args, **kwargs):
+        if not MarketProfile.objects.filter(user=request.user).exists():
+            return Response({'error':'You do not have market to edit'},status.HTTP_400_BAD_REQUEST)
+
+        serializer = MarketProfileSer(data=request.data)
+        if serializer.is_valid():
+            old_id = MarketProfile.objects.get(user=request.user).id
+            market = MarketProfile.objects.get(user=request.user)
+
+            market.pic.delete()
+            market.wall_pic.delete()
+            market.delete()
+
+            serializer.save(user=request.user, id=old_id)
+            return Response(serializer.data)
+        return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
+
+
+    def delete(self, request, *args, **kwargs):
+        if not MarketProfile.objects.filter(user=request.user).exists():
+            return Response({'error':'You do not have market to delete'},status.HTTP_400_BAD_REQUEST)
+
+        market = MarketProfile.objects.get(user=request.user)
+        market.pic.delete()
+        market.wall_pic.delete()
+        market.delete()
+        return Response({'msg': 'Your market profile has been deleted'})
+
+
+    def get(self,  request, *args, **kwargs):
+        if MarketProfile.objects.filter(user=request.user).exists():
+            market = MarketProfileSer(
+                MarketProfile.objects.filter(user=request.user).first())
+            return Response(market.data)
+        else:
+            return HttpResponseNotFound( 'Page Not Found :c ' )
+
+########################################################
+class ShowMarketView(APIView):      # api/market/<id>  #
+    permission_classes = (IsAuthenticated,)
+
+    def get(self,  request, *args, **kwargs):
+        if MarketProfile.objects.filter(id=kwargs['id']).exists():
+            market = MarketProfileSer(
+                MarketProfile.objects.filter(id=kwargs['id']).first())
+            return Response(market.data)
+        else:
+            return HttpResponseNotFound( 'Page Not Found :c ')
+
+
+
+
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#############################<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#       >>  Products  <<    #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#############################<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+########################################################
+class CreateProductView(APIView):      #   api/product #
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request, *args, **kwargs):
+        if not MarketProfile.objects.filter(user=request.user).exists():
+            return Response({'error':'You do not have a market, create a market profile first to add products'},status.HTTP_400_BAD_REQUEST)
+
+        serializer = ProductSer(data=request.data)
+        if serializer.is_valid():
+
+            serializer.save(
+                market=MarketProfile.objects.get(user=request.user))
+            product = Product.objects.filter(
+                market=MarketProfile.objects.get(user=request.user)).last()
+
+            for pic in request.FILES.getlist('pics', None):
+                img = ProductImg(pic=pic, product=product)
+                img.save()
+            
+            for feature in request.POST.get('features', None):
+                product_features +=  feature + ', '
+
+            product.features    =   product_features
+            product.save()
+
+            return Response(serializer.data)
+        return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
+
+
+########################################################
+class ProductView(APIView):       #   api/product/<id> #
+    permission_classes = (IsAuthenticated,)
+
+    def get(self,  request, *args, **kwargs):
+        if Product.objects.filter(id=kwargs['id']).exists():
+            product = Product.objects.get(id=kwargs['id'])
+
+            serialized = ProductSer(product)
+            d = serialized.data
+
+            pics = []
+            product = Product.objects.get(id=kwargs['id'])
+            
+            for img in ProductImg.objects.filter(product=product):
+                pics.append(img.pic.url)
+
+            d.update({'pics':pics})
+            return Response(d)
+        else:
+            return HttpResponseNotFound('Page Not Found :c ')
+
+
+    def put(self, request, *args, **kwargs):
+        if not Product.objects.filter(id=kwargs['id']).exists():
+            return HttpResponseNotFound('Page Not Found :c ')
+
+        his_market = MarketProfile.objects.filter(user=request.user).first()
+        if not his_market == Product.objects.get(id=kwargs['id']).market:
+            return Response({'error':'This product does not belong to you'},status.HTTP_400_BAD_REQUEST)
+
+        serializer = ProductSer(data=request.data)
+        if serializer.is_valid():
+            old_id = Product.objects.get(id=kwargs['id']).id
+            product = Product.objects.get(id=kwargs['id'])
+
+            product.wall_pic.delete()
+            for img in ProductImg.objects.filter(product=product):
+                img.pic.delete()
+
+            product.delete()
+
+            serializer.save(market=his_market, id=old_id)
+
+            product = Product.objects.get(id=old_id)
+
+            for pic in request.FILES.getlist('pics', None):
+                img = ProductImg(pic=pic, product=product)
+                img.save()
+            
+            for feature in request.POST.get('features', None):
+                product_features +=  feature + ', '
+
+            product.features    =   product_features
+            product.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
+
+
+    def delete(self, request, *args, **kwargs):
+        if not Product.objects.filter(id=kwargs['id']).exists():
+            return HttpResponseNotFound('Page not found :c')
+
+        his_market = MarketProfile.objects.filter(user=request.user).first()
+        if not his_market == Product.objects.get(id=kwargs['id']).market:
+            return Response({'error':'This product does not belong to you'}, status.HTTP_400_BAD_REQUEST)
+
+        product = Product.objects.get(id=kwargs['id'])
+        for img in ProductImg.objects.filter(product=product):
+            img.pic.delete()
+        product.wall_pic.delete()
+        product.delete()
+        return Response({'msg': 'Your product has been deleted'})
 
 
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>##############################<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<

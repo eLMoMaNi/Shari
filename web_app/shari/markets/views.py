@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
 from .models import MarketProfile
+from products.models import Product
 from django.http import HttpResponse, HttpResponseNotFound
 import json
 # Create your views here.
@@ -49,7 +50,7 @@ def show(request,id):
     if request.method == 'GET':
         if MarketProfile.objects.filter(id=id).exists():
             market  =   MarketProfile.objects.get(id=id)
-            return render(request,'markets/profile.html', {'market':market})
+            return render(request,'markets/profile.html', {'market':market, 'products': Product.objects.filter(market=market) })
     return HttpResponseNotFound('page not found')
 
 
@@ -68,7 +69,7 @@ def edit(request):
                     mclass.append(i)
 
             market.name     =   request.POST['name']
-            market.number   =   request.POST['number'],
+            market.number   =   request.POST['number']
             market.location =   { 'test': request.POST['location']} ,
             market.pic      =   request.FILES.get( 'pic', None )
             market.wall_pic =   request.FILES.get( 'wall_pic', None )

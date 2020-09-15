@@ -37,7 +37,7 @@
                 {% for img in imgs %}
                 <div class="carousel-item w-100">
                     <img class="d-block mx-auto" data-toggle="modal" data-target="#centralModal"
-                        style="height: 470px; " id='h' src="{{img.pic.url}}" alt="error alt">
+                        style="height: 470px; " id='h'  {% if product.wall_pic.url %} src="{{img.wall_pic.url}}"   {% else %}   src="/media/no_pic.png"  {% endif %} alt="error alt">
 
 
                     <div class="  d-none d-md-block">
@@ -142,7 +142,7 @@
                         <div class="carousel-item active w-100">
                             <img class="d-block mx-auto "
                                 style=" height: calc(100vh - 277px) ;  "
-                                src="{{product.wall_pic.url}}" alt="First slide">
+                                {% if product.wall_pic.url %} src="{{product.wall_pic.url}}"   {% else %}   src="/media/no_pic.png"  {% endif %} alt="First slide">
                             <div class="  d-none d-md-block">
                                 <p class="text-center lead text-white "> &lt; - click the arrow to swap -&gt; </p>
                             </div>
@@ -153,7 +153,7 @@
                         <div class="carousel-item w-100">
                             <img class="d-block mx-auto " data-toggle="modal" data-target="#centralModal"
                                 style=" height: calc(100vh - 277px)   "
-                                src="{{img.pic.url}}" alt="error alt">
+                                {% if product.wall_pic.url %} src="{{img.wall_pic.url}}"   {% else %}   src="/media/no_pic.png"  {% endif %} alt="error alt">
 
 
                             <div class="  d-none d-md-block">
