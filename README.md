@@ -28,5 +28,13 @@ ___
 
 ___
 
+# AWS Cloud Architecture
+
+![shari_landing_image](cloud/arch.jpg)
+
+##### Shari provides its services for web & mobile platform all over Serverless environment with Django-based AWS lambda functions  
+
+___
+
 .
 ## Note: All works done so far are only for development environment. 
