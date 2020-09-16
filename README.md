@@ -9,7 +9,7 @@ ___
 
  shari-amazon.tk  (demo)</a>
 ### android
-<a href="https://github.com/eLMoMaNi/Shari/tree/master/mobile_app/build/app/outputs/apk/release" class="button big" style="font-width:900">  <img src="docs/android.gif" width=150px > 
+<a href="https://github.com/eLMoMaNi/Shari/tree/master/mobile_app/build/app/outputs/apk/release" class="button big" style="font-width:900">  <img src="docs/android.gif" width=300px > 
 
  android apk  (demo)</a>
  
