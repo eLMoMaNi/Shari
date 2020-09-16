@@ -15,6 +15,15 @@ void main() {
 class ShariApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // precache categories background images
+    for (String cate in [
+      "Food",
+      "Grocery",
+      "Clothes",
+      "Handicraft",
+      "Pharmacies"
+    ]) precacheImage(AssetImage("assets/images/categories/$cate.jpg"), context);
+
     return MultiProvider(
         providers: [
           ChangeNotifierProvider(

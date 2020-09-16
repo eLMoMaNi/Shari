@@ -23,7 +23,7 @@ class CategoryCard extends StatelessWidget {
                             "assets/images/categories/$_category.jpg"),
                         fit: BoxFit.cover,
                         colorFilter: ColorFilter.mode(
-                          Colors.black.withOpacity(0.10),
+                          Colors.black.withOpacity(0.20),
                           BlendMode.srcOver,
                         )),
                 borderRadius: BorderRadius.circular(10),
