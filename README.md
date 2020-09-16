@@ -1,5 +1,13 @@
+
 ![shari_landing_image](docs/home.png)
 ___
+
+# website
+<a href="https://shari-amazon.tk" class="button big" style="font-width:900">  <img src="docs/fav.png" width=100px > 
+
+ shari-amazon.tk  (demo)</a>
+
+
 # Folders:-
 
 .
@@ -37,4 +45,4 @@ ___
 ___
 
 .
-## Note: All works done so far are only for development environment. 
+## Note: All works done so far are only for development environment.
