@@ -32,7 +32,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: EdgeInsets.all(20),
+      padding: EdgeInsets.symmetric(vertical: 20),
       // shrinkWrap: true,
       children: [
         Container(
@@ -45,7 +45,7 @@ class HomeScreen extends StatelessWidget {
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 childAspectRatio: 2 / 2,
-                crossAxisSpacing: 20,
+                crossAxisSpacing: 0,
                 mainAxisSpacing: 15),
             primary: false,
             physics: NeverScrollableScrollPhysics(),
