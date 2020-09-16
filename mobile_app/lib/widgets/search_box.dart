@@ -1,4 +1,9 @@
+import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/material.dart';
+
+import 'package:http/http.dart' as http;
+import 'package:image_picker/image_picker.dart';
 
 import '../screens/search_screen.dart';
 
@@ -21,6 +26,42 @@ class SearchBox extends StatefulWidget {
 class _SearchBoxState extends State<SearchBox> {
   final _searchController = TextEditingController();
   bool _hasText = false;
+  final picker = ImagePicker();
+  File _pickedImage;
+
+  Future pickImage() async {
+    final pickedFile = await picker.getImage(
+        source: ImageSource.camera, maxHeight: 480, maxWidth: 640);
+    if (pickedFile == null) return;
+
+    _pickedImage = File(pickedFile.path);
+    var imageBytes = _pickedImage.readAsBytesSync();
+    String imageB64 = base64Encode(imageBytes);
+    var res = await http.post(
+        "https://bf7we8up0e.execute-api.eu-central-1.amazonaws.com/alpha/getFeatures2",
+        body: json.encode({
+          //
+          "img": imageB64,
+        }));
+    if (res.body == null) return;
+    showDialog(
+        context: context,
+        builder: (_) => AlertDialog(
+              //
+              content: Container(
+                width: MediaQuery.of(context).size.width * .65,
+                height: MediaQuery.of(context).size.height * .50,
+                child: ListView(
+                  children: ((json.decode(res.body) as List).cast<String>())
+                      .map((e) => Padding(
+                            padding: EdgeInsets.all(8),
+                            child: Text(e),
+                          ))
+                      .toList(),
+                ),
+              ),
+            ));
+  }
 
   void _searchProducts(String input) {
     var args = {...widget.initArgs};
@@ -91,9 +132,7 @@ class _SearchBoxState extends State<SearchBox> {
               ),
             ),
             IconButton(
-                onPressed: () {
-                  //TODO implement pick image search
-                },
+                onPressed: () => pickImage(),
                 icon: Icon(
                   Icons.camera_enhance,
                   color: widget.borederColor ?? Theme.of(context).accentColor,

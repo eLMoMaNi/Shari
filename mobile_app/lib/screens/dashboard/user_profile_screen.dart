@@ -77,7 +77,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(100),
                             child: Image.network(
-                              "$host${user.details.profilePicture}" ??
+                              "${user.details.profilePicture}" ??
                                   "https://via.placeholder.com/150",
                               fit: BoxFit.fill,
                             ),

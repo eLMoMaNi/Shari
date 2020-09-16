@@ -59,7 +59,7 @@ class MarketDashboardScreen extends StatelessWidget {
                             background: Stack(
                               children: [
                                 Image.network(
-                                  host + currentMarket.details.wallpaper,
+                                  currentMarket.details.wallpaper,
                                   // fit: BoxFit.fitWidth,
                                   width: vw,
                                   fit: BoxFit.cover,
@@ -73,9 +73,7 @@ class MarketDashboardScreen extends StatelessWidget {
                                       color: currentMarket
                                           .details.theme.primaryColor,
                                       child: Image.network(
-                                        host +
-                                            currentMarket
-                                                .details.profilePicture,
+                                        currentMarket.details.profilePicture,
                                         width: 110,
                                         height: 110,
                                         fit: BoxFit.contain,

@@ -43,7 +43,6 @@ class _MarketHomeScreenState extends State<MarketHomeScreen> {
           FlatButton(
             child: const Text('Got it'),
             onPressed: () {
-              //TODO
               retColor = initColor;
               Navigator.of(context).pop(retColor); //return picked color
             },

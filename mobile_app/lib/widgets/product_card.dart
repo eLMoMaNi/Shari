@@ -140,7 +140,7 @@ class ProductCard extends StatelessWidget {
                             ),
                           ],
                         ))),
-                      ), //TODO
+                      ),
                     ),
                     decoration: BoxDecoration(
                       boxShadow: [
