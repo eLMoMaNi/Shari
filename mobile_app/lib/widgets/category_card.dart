@@ -6,7 +6,7 @@ class CategoryCard extends StatelessWidget {
   final String _category;
   final IconData _icon;
   final MaterialColor _color;
-  CategoryCard(this._category, this._icon, this._color);
+  const CategoryCard(this._category, this._icon, this._color);
   @override
   Widget build(BuildContext context) {
     return Container(

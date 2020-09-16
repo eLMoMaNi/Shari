@@ -43,7 +43,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print("Building\n\n");
     return Scaffold(
       drawer: MainDrawer(),
       appBar: _delAppBar

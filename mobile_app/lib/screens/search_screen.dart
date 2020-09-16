@@ -37,7 +37,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
   void _loadProducts() {
     _isLoading = true;
-    print("PAGE:::$_currentPage");
+
     Provider.of<CurrentUser>(context, listen: false)
         .fetchProducts(
             categories: _categories,
@@ -45,6 +45,7 @@ class _SearchScreenState extends State<SearchScreen> {
             searchText: _searchText,
             marketId: _marketId ?? "")
         .then((List<Product> fetchedList) {
+      if (!mounted) return;
       //if fetch returned "no results"
       if (fetchedList.isEmpty) {
         setState(() {
@@ -59,6 +60,7 @@ class _SearchScreenState extends State<SearchScreen> {
         });
       }
     });
+    if (!mounted) return;
     _currentPage += 1;
   }
 
@@ -74,14 +76,12 @@ class _SearchScreenState extends State<SearchScreen> {
     Map<String, dynamic> args = ModalRoute.of(context).settings.arguments ?? {};
     _searchText = args["searchText"] ?? "";
     _categories = args["categories"];
-    print("CAAAAAAAAAT\n\n\n${_categories}");
 
     _tags = args["tags"];
     _marketId = widget.marktId;
     _query = args["query"];
     _color = args["color"] ?? widget.color;
-    print(_color);
-    print("SearCHING FOR $_searchText");
+
     _loadProducts();
 
     super.didChangeDependencies();
@@ -89,7 +89,6 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print("Search for $_searchText\n cates:$_categories");
     return Scaffold(
         body: Column(
       children: [
@@ -121,7 +120,6 @@ class _SearchScreenState extends State<SearchScreen> {
               if (index >= _results.length) {
                 // Don't trigger if one async loading is already under way
                 if (!_isLoading) {
-                  print("Loading next page");
                   _loadProducts();
                 }
                 return Center(
@@ -132,7 +130,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   ),
                 );
               }
-              print("building $index");
+
               return Center(child: ProductCard(_results[index], _color));
             },
           ),

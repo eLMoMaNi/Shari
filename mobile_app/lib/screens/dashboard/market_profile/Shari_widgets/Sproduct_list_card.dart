@@ -51,7 +51,6 @@ class SProductListCard extends StatelessWidget {
                       ordering: "-created_at"),
               builder: (context, snap) {
                 if (snap.hasData) {
-                  print(snap.data);
                   return Container(
                     //  width: double.infinity,
                     height: 100,

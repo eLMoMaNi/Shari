@@ -74,9 +74,9 @@ class MarketDashboardScreen extends StatelessWidget {
                                           .details.theme.primaryColor,
                                       child: Image.network(
                                         currentMarket.details.profilePicture,
-                                        width: 110,
-                                        height: 110,
-                                        fit: BoxFit.contain,
+                                        width: 100,
+                                        height: 100,
+                                        fit: BoxFit.cover,
                                       ),
                                     ),
                                   ),

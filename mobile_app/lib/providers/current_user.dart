@@ -39,7 +39,6 @@ class CurrentUser with ChangeNotifier {
       String searchText = "",
       String marketId = "",
       String ordering = ""}) async {
-    print('SEACHING>>>>');
     //converting categories list to query
     String categoriesQuery =
         categories?.reduce((value, element) => value + "," + element) ?? "";
@@ -48,7 +47,7 @@ class CurrentUser with ChangeNotifier {
       "$host/api/search?search=$searchText&mclass=$categoriesQuery&page=$page&market=$marketId&ordering=$ordering",
       headers: headers,
     );
-    print(res.request);
+
     if (res.statusCode == 404) {
       //? if entered empty page, this could be deleted
       return [];
@@ -61,7 +60,6 @@ class CurrentUser with ChangeNotifier {
     List<Product> results = (body["results"] as List<dynamic>).map((e) {
       return Product.fromJSON(e as Map<String, dynamic>);
     }).toList();
-    print("done sercing ");
 
     return results;
   }

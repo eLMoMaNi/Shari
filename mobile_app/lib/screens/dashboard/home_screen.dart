@@ -4,24 +4,28 @@ import '../../widgets/category_card.dart';
 import '../../widgets/search_box.dart';
 
 const List<Map<String, dynamic>> _categories = const [
-  {"category": "Food", "color": Colors.red, "icon": Icons.restaurant},
-  {
+  const {"category": "Food", "color": Colors.red, "icon": Icons.restaurant},
+  const {
     "category": "Grocery",
     "color": Colors.green,
     "icon": Icons.local_grocery_store
   },
-  {
+  const {
     "category": "Clothes",
     "color": Colors.purple,
     "icon": Icons.design_services
   },
-  {"category": "Handicraft", "color": Colors.pink, "icon": Icons.handyman},
-  {
+  const {
+    "category": "Handicraft",
+    "color": Colors.pink,
+    "icon": Icons.handyman
+  },
+  const {
     "category": "Pharmacies",
     "color": Colors.orange,
     "icon": Icons.local_pharmacy
   },
-  {"category": "Other", "color": Colors.grey, "icon": Icons.waves},
+  const {"category": "Other", "color": Colors.grey, "icon": Icons.waves},
 ];
 
 class HomeScreen extends StatelessWidget {

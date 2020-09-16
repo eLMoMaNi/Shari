@@ -75,7 +75,6 @@ class ProductCard extends StatelessWidget {
                                   textAlign: TextAlign.center,
                                 );
                               }
-                              if (snap.hasError) print(snap.error);
                               return Container(
                                   width: 10,
                                   height: 10,

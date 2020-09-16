@@ -26,7 +26,7 @@ class LoginScreen extends StatelessWidget {
       //get response
       final res = await http.post(host + _url,
           body: {"username": data.name, "password": data.password});
-      print(res.body);
+
       //define body type
       Map<String, dynamic> body = json.decode(res.body);
 
