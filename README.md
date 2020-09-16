@@ -1,13 +1,19 @@
 
+
 ![shari_landing_image](docs/home.png)
 ___
 
-# website
+# Releases:-
+### website
 <a href="https://shari-amazon.tk" class="button big" style="font-width:900">  <img src="docs/fav.png" width=100px > 
 
  shari-amazon.tk  (demo)</a>
+### android
+<a href="https://github.com/eLMoMaNi/Shari/tree/master/mobile_app/build/app/outputs/apk/release" class="button big" style="font-width:900">  <img src="docs/android.gif" width=150px > 
 
-
+ android apk  (demo)</a>
+ 
+   
 # Folders:-
 
 .
