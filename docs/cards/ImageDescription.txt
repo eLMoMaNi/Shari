@@ -1,0 +1,23 @@
+
+--- Market ---
+
+Reach your customers in their homes, Start selling online!
+Easily sell online and ship orders to customers, or local delivery no matter what type of business you have.
+
+ Customize your market profile with many built-in cards and thems 
+
+ Get smart suggestion & statistics of products and trends 
+
+ build your own chatbot and start automate your work 
+
+
+--- Product --- 
+
+Good is not an option while there is BEST -smart buyer
+Browse many products of all categories, search for items you need based on your preferences and filters
+
+
+--- Programmer ---
+
+Programmer or Researcher?
+Shari provide a RESTful APIs you can use for your own research and programming logic. Go to this docs to learn more about Shari's APIs
