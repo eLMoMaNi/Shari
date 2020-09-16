@@ -1,3 +1,4 @@
+import 'package:Shari/screens/product_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
@@ -8,14 +9,13 @@ import '../../../../providers/current_user.dart';
 //
 
 class SProductListCard extends StatelessWidget {
-  final host = "192.168.1.7:8000"; //TOCHANGE
   final CurrentMarket currentMarket;
   SProductListCard(this.currentMarket);
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(bottom: 35),
-      height: 200,
+      height: 300,
       child: Card(
         elevation: 10,
         margin: EdgeInsets.only(bottom: 35),
@@ -53,27 +53,68 @@ class SProductListCard extends StatelessWidget {
                 if (snap.hasData) {
                   return Container(
                     //  width: double.infinity,
-                    height: 100,
+                    height: 200,
                     child: ListView(
                       scrollDirection: Axis.horizontal,
                       children: snap.data
-                          .map((e) => Container(
-                                height: 100,
-                                width: 100,
-                                child: Card(
-                                  //
-                                  child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Container(
-                                        height: 70,
-                                        width: 100,
-                                        child: Image.network(e.featuredPic,
-                                            fit: BoxFit.cover),
-                                      ),
-                                      Text(e.title)
-                                    ],
+                          .map((e) => InkWell(
+                                onTap: () => Navigator.of(context)
+                                    .push(MaterialPageRoute(
+                                        builder: (_) => ProductScreen(
+                                              e,
+                                              primaryColor: currentMarket
+                                                  .details.theme.primaryColor,
+                                              accentColor: currentMarket
+                                                  .details.theme.accentColor,
+                                            ))),
+                                child: Container(
+                                  height: 100,
+                                  width: 100,
+                                  child: Card(
+                                    //
+                                    elevation: 5,
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          height: 70,
+                                          width: 100,
+                                          child: Image.network(
+                                            e.featuredPic,
+                                            fit: BoxFit.cover,
+                                            cacheHeight: 70,
+                                            //cacheWidth: 100,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 15,
+                                        ),
+                                        Text(
+                                          e.title,
+                                          style: TextStyle(
+                                            fontFamily: "Tajawal",
+                                            color: currentMarket
+                                                .details.theme.primaryColor,
+                                          ),
+                                          overflow: TextOverflow.fade,
+                                          maxLines: 3,
+                                          textAlign: TextAlign.center,
+                                        ),
+                                        Expanded(
+                                          child: Container(),
+                                        ),
+                                        Chip(
+                                          label: Text(
+                                            "${e.price}",
+                                            style: TextStyle(
+                                                fontFamily: "Comfortaa"),
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 1,
+                                          ),
+                                          backgroundColor: currentMarket
+                                              .details.theme.accentColor,
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ))

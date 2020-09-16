@@ -7,11 +7,15 @@ import '../widgets/rating_widget.dart';
 
 class ProductScreen extends StatelessWidget {
   final Product product;
-  ProductScreen(this.product);
+  final Color primaryColor;
+  final Color accentColor;
+  ProductScreen(this.product,
+      {this.primaryColor = Colors.blue, this.accentColor = Colors.blueGrey});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: primaryColor,
         title: Text(product.title),
       ),
       floatingActionButton: FloatingActionButton(
@@ -21,9 +25,8 @@ class ProductScreen extends StatelessWidget {
           children: [
             Container(
               decoration: BoxDecoration(
-                  border: Border(
-                      bottom: BorderSide(
-                          width: 1, color: Theme.of(context).accentColor))),
+                  border:
+                      Border(bottom: BorderSide(width: 1, color: accentColor))),
               child: Image.network(
                 product.featuredPic,
                 fit: BoxFit.fitWidth,
@@ -44,7 +47,7 @@ class ProductScreen extends StatelessWidget {
                         fontSize: 20,
                         color: Theme.of(context).scaffoldBackgroundColor),
                   ),
-                  backgroundColor: Theme.of(context).primaryColor,
+                  backgroundColor: primaryColor,
                 )
               ],
             ),

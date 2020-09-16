@@ -61,6 +61,29 @@ flutter:
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/assets-and-images/#from-packages
 
+
+
+
+  # why all these fonts? idk ¯\_(ツ)_/¯
+  fonts:
+    - family: Tajawal
+      fonts:
+        - asset: assets/fonts/Tajawal-Regular.ttf
+        - asset: assets/fonts/Tajawal-Medium.ttf
+        - asset: assets/fonts/Tajawal-Light.ttf
+        - asset: assets/fonts/Tajawal-ExtraLight.ttf
+        - asset: assets/fonts/Tajawal-ExtraBold.ttf
+        - asset: assets/fonts/Tajawal-Bold.ttf
+        - asset: assets/fonts/Tajawal-Black.ttf
+    - family: Comfortaa
+      fonts:
+        - asset: assets/fonts/Comfortaa-Regular.ttf
+        - asset: assets/fonts/Comfortaa-Medium.ttf
+        - asset: assets/fonts/Comfortaa-Light.ttf
+        - asset: assets/fonts/Comfortaa-Bold.ttf
+        - asset: assets/fonts/Comfortaa-SemiBold.ttf
+        
+
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a

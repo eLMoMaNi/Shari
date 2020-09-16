@@ -65,8 +65,8 @@ class _MarketHomeScreenState extends State<MarketHomeScreen> {
         children: [
           buildColorPickers(context, marketTheme, currentMarket),
           SizedBox(height: 20),
-          SEmptyWidget(currentMarket),
           SProductListCard(currentMarket),
+          SEmptyWidget(currentMarket),
           SizedBox(
             height: 34,
           ),

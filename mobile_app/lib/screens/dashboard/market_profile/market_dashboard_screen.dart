@@ -62,6 +62,7 @@ class MarketDashboardScreen extends StatelessWidget {
                                   currentMarket.details.wallpaper,
                                   // fit: BoxFit.fitWidth,
                                   width: vw,
+                                  height: .35 * vh - 10,
                                   fit: BoxFit.cover,
                                 ),
                                 Container(
