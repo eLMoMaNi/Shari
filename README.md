@@ -2,7 +2,7 @@
 
 ![shari_landing_image](docs/home.png)
 ___
-# Note: this is the master branch, to see commits committed only during the Teckathon, head to <a href="https://github.com/eLMoMaNi/Shari/tree/Teckathon">Teckathon-branch</a>
+# Note: this is the master branch, to see commits committed only during the Teckathon, head to <a href="https://github.com/eLMoMaNi/Shari/tree/Teckathon">Teckathon-branch</a>.
 # Releases:-
 
 ## Project Presentation (Video)
