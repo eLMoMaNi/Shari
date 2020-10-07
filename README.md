@@ -1,6 +1,17 @@
 
 
 ![shari_landing_image](docs/home.png)
+
+<br>
+
+# 🎉 We Won the (Best Use of AWS) place in AmazonTeckathon 2020 !  🎉
+
+<br>
+
+<a href="https://youtu.be/5jVcb9wJe1c" > <b> Results Announcement  </b> </a>
+
+<br>
+
 ___
 # Note: this is the master branch, to see commits committed only during the Teckathon, head to <a href="https://github.com/eLMoMaNi/Shari/tree/Teckathon">Teckathon-branch</a>.
 # Releases:-
