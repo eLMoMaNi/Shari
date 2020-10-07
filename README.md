@@ -4,7 +4,7 @@
 
 <br>
 
-# 🎉 We Won the (Best Use of AWS) place in AmazonTeckathon 2020 !  🎉
+#  We Won the (Best Use of AWS) place in AmazonTeckathon 2020 !  🎉🎉🎉
 
 <br>
 
